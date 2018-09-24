@@ -1,0 +1,20 @@
+{
+  "name": "bparse",
+  "version": "0.0.1",
+  "description": "HTTP request body parser",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "author": "Vidar",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^23.5.0"
+  },
+  "dependencies": {
+    "formidable": "^1.2.1"
+  }
+}
