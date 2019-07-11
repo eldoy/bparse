@@ -1,5 +1,15 @@
 const formidable = require('formidable')
 
+const decode = function(obj = {}) {
+  for (const key in obj) {
+    if (obj[key] && typeof obj[key] === 'object') {
+      decode(obj[key])
+    } else if (typeof obj[key] === 'string') {
+      obj[key] = decodeURIComponent(obj[key])
+    }
+  }
+}
+
 const bodyParser = (req) => {
   return new Promise((resolve, reject) => {
     const form = formidable.IncomingForm()
@@ -12,7 +22,7 @@ const bodyParser = (req) => {
     })
 
     form.on('field', (field, value) => {
-      req.params[field] = decodeURIComponent(value)
+      req.params[field] = value
     })
 
     form.on('error', (err) => {
@@ -20,6 +30,7 @@ const bodyParser = (req) => {
     })
 
     form.on('end', () => {
+      decode(req.params)
       resolve(req)
     })
 

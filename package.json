@@ -1,24 +1,29 @@
 {
   "name": "bparse",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "HTTP request body parser",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/fugroup/bparse.git"
+    "type": "git",
+    "url": "https://github.com/fugroup/bparse.git"
   },
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "start": "nodemon server.js"
   },
   "author": "fugroup <vidar@fugroup.net>",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^23.5.0"
+    "axios": "^0.19.0",
+    "jest": "^23.6.0"
   },
   "dependencies": {
     "formidable": "^1.2.1"
-  }
+  },
+  "files": [
+    "index.js"
+  ]
 }
