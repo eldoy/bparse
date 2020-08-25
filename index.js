@@ -22,22 +22,37 @@ const toJSON = (obj = {}) => {
   }
 }
 
-const bodyParser = (req, options = {}) => {
+const bparse = (req, options = {}) => {
   options = { ...DEFAULT_OPTIONS, ...options }
+
+  req.files = []
+  req.params = {}
+
   const form = formidable(options)
+
   return new Promise((resolve, reject) => {
-    form.parse(req, (err, fields, files) => {
-      if (!err) {
-        req.files = files
-        req.params = fields
-        if (/multipart/i.test(req.headers['content-type'])) {
-          toJSON(req.params)
-        }
-        decode(req.params)
-      }
+    form.on('file', (field, file) => {
+      req.files.push(file)
+    })
+
+    form.on('field', (field, value) => {
+      req.params[field] = value
+    })
+
+    form.on('error', (err) => {
       resolve(req)
     })
+
+    form.once('end', () => {
+      if (/multipart/i.test(req.headers['content-type'])) {
+        toJSON(req.params)
+      }
+      decode(req.params)
+      resolve(req)
+    })
+
+    form.parse(req)
   })
 }
 
-module.exports = bodyParser
+module.exports = bparse
