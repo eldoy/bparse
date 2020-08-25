@@ -8,7 +8,14 @@ Based on formidable, this body parser will give you parameters and files posted 
 ### USAGE
 On your Node.js server:
 ```javascript
-await bodyparser(req)
+const bparse = require('bparse')
+
+// With default options
+await bparse(req)
+
+// With options, same as in node formidable
+const options = { maxFileSize: 20000 * 1024 * 1024 }
+await bparse(req, options)
 
 // Request parameters
 req.params
