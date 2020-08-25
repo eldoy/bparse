@@ -12,12 +12,13 @@ const decode = function(obj = {}) {
 
 const bodyParser = (req) => {
   return new Promise((resolve, reject) => {
-    const form = formidable.IncomingForm()
+    const form = formidable({
+      maxFileSize: 20000 * 1024 * 1024
+    })
     req.files = []
     req.params = {}
-    form.maxFileSize = 20000 * 1024 * 1024
 
-    form.on('file', function(field, file) {
+    form.on('file', (field, file) => {
       req.files.push(file)
     })
 
@@ -29,7 +30,7 @@ const bodyParser = (req) => {
       resolve(req)
     })
 
-    form.on('end', () => {
+    form.once('end', () => {
       decode(req.params)
       resolve(req)
     })

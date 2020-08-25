@@ -1,6 +1,6 @@
 {
   "name": "bparse",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "HTTP request body parser",
   "main": "index.js",
   "directories": {
@@ -8,20 +8,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fugroup/bparse.git"
+    "url": "https://github.com/eldoy/bparse.git"
   },
   "scripts": {
     "test": "jest --watch",
     "start": "nodemon server.js"
   },
-  "author": "fugroup <vidar@fugroup.net>",
+  "author": "Vidar Eldøy <vidar@eldoy.com>",
   "license": "MIT",
   "devDependencies": {
-    "axios": "^0.19.0",
-    "jest": "^23.6.0"
+    "axios": "^0.20.0",
+    "jest": "^26.4.2"
   },
   "dependencies": {
-    "formidable": "^1.2.1"
+    "formidable": "^2.0.0-canary.20200504.1"
   },
   "files": [
     "index.js"
