@@ -21,7 +21,7 @@
     "jest": "^26.4.2"
   },
   "dependencies": {
-    "formidable": "^2.0.0-canary.20200504.1"
+    "formidable": "^1.2.2"
   },
   "files": [
     "index.js"
