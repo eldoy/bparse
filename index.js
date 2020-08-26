@@ -17,7 +17,9 @@ const decode = (obj = {}) => {
 const toJSON = (obj = {}) => {
   for (const key in obj) {
     if (typeof obj[key] === 'string') {
-      obj[key] = JSON.parse(obj[key])
+      try {
+        obj[key] = JSON.parse(obj[key])
+      } catch(e) {}
     }
   }
 }

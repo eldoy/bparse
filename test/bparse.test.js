@@ -15,6 +15,7 @@ describe('bparse', () => {
   it('should parse Multipart params correctly', async () => {
     const formData = new FormData()
     formData.append('config', JSON.stringify({ resize: [1, 2] }))
+    formData.append('action', 'upload')
     const data = (
       await axios.post(
         'http://localhost:7000',
