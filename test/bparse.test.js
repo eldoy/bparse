@@ -12,6 +12,20 @@ describe('bparse', () => {
     expect(data.params.db.name).toBe('hello')
   })
 
+  it('should parse JSON regex params', async () => {
+    const data = (
+      await axios.post('http://localhost:7000', { db: { name: '%r/V/i' } })
+    ).data
+    expect(data.params.db.name).toBe('%r/V/i')
+  })
+
+  it('should parse ampersand strings', async () => {
+    const data = (
+      await axios.post('http://localhost:7000', { db: { name: 'hey&hello' } })
+    ).data
+    expect(data.params.db.name).toBe('hey&hello')
+  })
+
   it('should parse Multipart params correctly', async () => {
     const formData = new FormData()
     formData.append('config', JSON.stringify({ resize: [1, 2] }))
