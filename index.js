@@ -35,10 +35,11 @@ const bparse = (req, options = {}) => {
       resolve(req)
     })
 
-    form.once('end', () => {
+    form.once('end', (body) => {
       if (/multipart/i.test(req.headers['content-type'])) {
         toJSON(req.params)
       }
+      req.body = body
       resolve(req)
     })
 

@@ -21,7 +21,7 @@
     "jest": "^26.4.2"
   },
   "dependencies": {
-    "formidable": "^1.2.2"
+    "formidable": "https://github.com/eldoy/formidable"
   },
   "files": [
     "index.js"
