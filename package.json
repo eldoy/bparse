@@ -17,8 +17,8 @@
   "author": "Vidar Eldøy <vidar@eldoy.com>",
   "license": "MIT",
   "devDependencies": {
-    "axios": "^0.21.1",
-    "jest": "^26.6.3"
+    "axios": "^0.26.0",
+    "jest": "^27.5.1"
   },
   "dependencies": {
     "formidable": "https://github.com/eldoy/formidable"
