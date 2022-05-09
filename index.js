@@ -17,14 +17,7 @@ function toJSON(obj = {}) {
 function toObject(file) {
   const date = file.lastModifiedDate
   return {
-    // Legacy formidable attributes
     path: file.path,
-    mtime: date,
-    length: file.length,
-    filename: file.filename,
-    mime: file.mime,
-
-    // Standard attributes
     lastModified: date.valueOf(),
     lastModifiedDate: date,
     name: file.name,
