@@ -4,7 +4,7 @@ const DEFAULT_OPTIONS = {
   maxFileSize: 20000 * 1024 * 1024
 }
 
-const toJSON = (obj = {}) => {
+function toJSON(obj = {}) {
   for (const key in obj) {
     if (typeof obj[key] === 'string') {
       try {
@@ -14,7 +14,26 @@ const toJSON = (obj = {}) => {
   }
 }
 
-const bparse = (req, options = {}) => {
+function toObject(file) {
+  const date = file.lastModifiedDate
+  return {
+    // Legacy formidable attributes
+    path: file.path,
+    mtime: date,
+    length: file.length,
+    filename: file.filename,
+    mime: file.mime,
+
+    // Standard attributes
+    lastModified: date.valueOf(),
+    lastModifiedDate: date,
+    name: file.name,
+    size: file.size,
+    type: file.type
+  }
+}
+
+module.exports = function bparse(req, options = {}) {
   options = { ...DEFAULT_OPTIONS, ...options }
 
   req.files = []
@@ -24,7 +43,7 @@ const bparse = (req, options = {}) => {
 
   return new Promise((resolve, reject) => {
     form.on('file', (field, file) => {
-      req.files.push(file)
+      req.files.push(toObject(file))
     })
 
     form.on('field', (field, value) => {
@@ -46,5 +65,3 @@ const bparse = (req, options = {}) => {
     form.parse(req)
   })
 }
-
-module.exports = bparse

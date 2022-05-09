@@ -27,7 +27,7 @@ describe('bparse', () => {
     expect(data.params.db.name).toBe('hey&hello')
   })
 
-  it('should parse Multipart params correctly', async () => {
+  it('should parse multipart params correctly', async () => {
     const formData = new FormData()
     formData.append('config', JSON.stringify({ resize: [1, 2] }))
     formData.append('action', 'upload')
