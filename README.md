@@ -2,19 +2,22 @@
 
 Based on formidable, this body parser will give you parameters and files posted to your Node.js server.
 
-### INSTALLATION
-```npm i bparse``` or ```yarn add bparse```
+### Installation
+```
+npm i bparse
+```
 
-### USAGE
+### Usage
 On your Node.js server:
-```javascript
-const bparse = require('bparse')
+
+```js
+var bparse = require('bparse')
 
 // With default options
 await bparse(req)
 
 // With options, same as in node formidable
-const options = { maxFileSize: 20000 * 1024 * 1024 }
+var options = { maxFileSize: 20000 * 1024 * 1024 }
 await bparse(req, options)
 
 // Request parameters
@@ -23,4 +26,7 @@ req.params
 // Request uploaded files
 req.files
 ```
-Enjoy! MIT Licensed.
+
+MIT Licensed. Enjoy!
+
+Created by [Eldøy Projects](https://eldoy.com)
