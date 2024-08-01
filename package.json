@@ -1,6 +1,6 @@
 {
   "name": "bparse",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "HTTP request body parser",
   "main": "index.js",
   "directories": {
@@ -21,10 +21,10 @@
     "form-data": "^4.0.0",
     "jest": "^28.1.0"
   },
-  "dependencies": {
-    "formidable": "https://github.com/eldoy/formidable"
-  },
   "files": [
     "index.js"
-  ]
+  ],
+  "dependencies": {
+    "formidable": "git+https://git@github.com/eldoy/formidable.git"
+  }
 }
