@@ -9,9 +9,11 @@ function toJSON(obj = {}) {
     if (obj[key] && typeof obj[key] == 'object') {
       toJSON(obj[key])
     } else {
-      try {
-        obj[key] = JSON.parse(obj[key])
-      } catch (e) {}
+      if (typeof obj[key] == 'string') {
+        try {
+          obj[key] = JSON.parse(obj[key])
+        } catch (e) {}
+      }
     }
   }
 }
