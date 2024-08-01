@@ -1,21 +1,23 @@
-const formidable = require('formidable')
+var formidable = require('formidable').default
 
-const DEFAULT_OPTIONS = {
+var DEFAULT_OPTIONS = {
   maxFileSize: 20000 * 1024 * 1024
 }
 
 function toJSON(obj = {}) {
-  for (const key in obj) {
-    if (typeof obj[key] === 'string') {
+  for (var key in obj) {
+    if (obj[key] && typeof obj[key] == 'object') {
+      toJSON(obj[key])
+    } else {
       try {
         obj[key] = JSON.parse(obj[key])
-      } catch(e) {}
+      } catch (e) {}
     }
   }
 }
 
 function toObject(file) {
-  const date = file.lastModifiedDate
+  var date = file.lastModifiedDate
   return {
     path: file.path,
     lastModified: date.valueOf(),
@@ -26,35 +28,20 @@ function toObject(file) {
   }
 }
 
-module.exports = function bparse(req, options = {}) {
+module.exports = async function bparse(req, options = {}) {
   options = { ...DEFAULT_OPTIONS, ...options }
 
   req.files = []
   req.params = {}
 
-  const form = formidable(options)
+  var form = formidable(options)
 
-  return new Promise((resolve, reject) => {
-    form.on('file', (field, file) => {
-      req.files.push(toObject(file))
-    })
-
-    form.on('field', (field, value) => {
-      req.params[field] = value
-    })
-
-    form.on('error', (err) => {
-      resolve(req)
-    })
-
-    form.once('end', (body) => {
-      if (/multipart/i.test(req.headers['content-type'])) {
-        toJSON(req.params)
-      }
-      req.body = body
-      resolve(req)
-    })
-
-    form.parse(req)
-  })
+  try {
+    var [params, files] = await form.parse(req)
+    req.params = params
+    req.files = files
+    if (/multipart/i.test(req.headers['content-type'])) {
+      toJSON(req.params)
+    }
+  } catch (e) {}
 }

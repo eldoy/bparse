@@ -25,6 +25,6 @@
     "index.js"
   ],
   "dependencies": {
-    "formidable": "git+https://git@github.com/eldoy/formidable.git"
+    "formidable": "^3.5.1"
   }
 }
